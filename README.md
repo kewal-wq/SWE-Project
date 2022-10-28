@@ -1,3 +1,3 @@
-# DSA Resource and Planner
+# Sem5- S-W-E mini project
 ### This is our Insitute Semester Project for Software Engineering Course.
-We are going to implement a whole DSA Resource and Planner system which will make life of users for finding every resource related to computer science field for free very easy.
+Small weather app which allows you to access weather by different inputs along with saving some favorites 😁.

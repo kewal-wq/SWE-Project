@@ -1,0 +1,11 @@
+.favourites__title{
+display: flex;
+justify-content: center;
+}
+
+.favourite__searchBar{
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+    align-items: center;
+}

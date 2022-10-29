@@ -1,0 +1,9 @@
+.virtualList__favorites{
+height: 20rem;
+overflow-y: auto;
+/* border: 2px solid black; */
+}
+
+.virtualList__favorites::-webkit-scrollbar {
+    width: 0.5rem;
+}

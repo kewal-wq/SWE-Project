@@ -1,0 +1,16 @@
+.homePage__title{
+    display: flex;
+    justify-content: center;
+}
+
+.inputFields{
+    display: flex;
+    justify-content: space-evenly;
+    height: 35vh;
+    align-items: flex-start;
+}
+
+.displayWeatherCard{
+    display: flex;
+    justify-content: center;
+}

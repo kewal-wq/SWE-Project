@@ -28,7 +28,7 @@ const Auth = () => {
   const onFinishLogin = async (values) => {
     const res = await handleLogin(values);
     if(res.success){
-        navigate('/dashboard');
+        navigate('/');
     } else {
         console.log("ERROR: ", res)
         toast.error("Error occured while loggin you in ☹");
@@ -41,7 +41,7 @@ const Auth = () => {
 
   return (
     <div className="auth__page">
-        <p style={{fontSize: 30}}>Welcome to DSA Resource Planner 🎉</p>
+        <p style={{fontSize: 30}}>Welcome to Weather Application</p>
       <Tabs defaultActiveKey={"1"} style={{ width: '40vw'}} onChange={(val) => console.log("VAL: ", val)}>
         <Tabs.TabPane tab="Signup" key="1">
           <Signup onFinishFailedSignup={onFinishFailedSignup} onFinishSignup={onFinishSignup}/>

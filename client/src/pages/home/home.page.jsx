@@ -1,8 +1,10 @@
-import React, {useState} from "react";
-import { AutoComplete, Input, Button } from "antd";
+import React, {useState, useContext} from "react";
+import {Button,Typography  } from "antd";
 import SearchBar from "../../components/inputData/searchBar.component";
 import DisplayWeather from "../../components/WeatherList/DisplayWeather";
-import {toast} from "react-toastify"
+import "./home.page.css";
+import {toast} from "react-toastify";
+import { AuthContext } from "../../context/auth.context";
 
 const Home = () => {
 
@@ -12,7 +14,7 @@ const Home = () => {
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
     const [weatherDataFromInput, setWeatherDataFromInput] = useState();
-    const [weatherDatafromCurrentLoaction, setWeatherDatafromCurrentLoaction] = useState();
+    const userObject = useContext(AuthContext);
 
     const onSelect = (data, option) => {
         setSelectedOption(option);
@@ -47,7 +49,7 @@ const Home = () => {
         console.log(latitude, longitude);
         const getWeather = async () => {
             const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_WEATHER_API}`);
-            const result = res.json();
+            const result = await res.json();
             setWeatherDataFromInput(result);
             console.log(result);
         }
@@ -66,7 +68,7 @@ const Home = () => {
             const getWeather = async () => {
                 const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${process.env.REACT_APP_WEATHER_API}`);
                 const result = await res.json();
-                setWeatherDatafromCurrentLoaction(result);
+                setWeatherDataFromInput(result);
             }
             getWeather();
               
@@ -75,15 +77,25 @@ const Home = () => {
             toast("Please provide our location for getting weather");
           }
     }
+
+    const {Title} = Typography;
     return (
         <div>
-            <h1>Welcome to weather application</h1>
-            <SearchBar inputValue={inputValue} onChange={onChange} onSelect={onSelect} options={options}/>
-        <Button type="primary" onClick={handleWeather}>Weather by current location</Button>
-        <DisplayWeather weatherData={weatherDataFromInput ? weatherDataFromInput : weatherDatafromCurrentLoaction}/>
+            <div className="homePage__title">
+            <Title>Weather application</Title>
+            </div>
+            <div className="inputAndWeather">
+            <div className="inputFields">
+            <SearchBar inputValue={inputValue} onChange={onChange} onSelect={onSelect} options={options} placeholder={`Weather of city/address`} enterButton={`Search`} width={350}/>
+        <Button type="primary" onClick={handleWeather} style={{width: 200, height: 45}}>Weather by current location</Button>
+        </div>
+        <div className="displayWeatherCard">
+        <DisplayWeather weatherData={weatherDataFromInput}/>
+        </div>
+        </div>
 
        </div>
     )
 }
 
-export default Home
+export default Home;

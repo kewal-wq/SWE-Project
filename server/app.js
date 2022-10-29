@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 9000;
 const cors = require('cors');
 
 const authRoutes = require('./routes/auth.routes');
-const discussionRoutes = require('./routes/discussion.routes');
 const userRoutes = require('./routes/user.routes');
 
 // Configuring MongoDB routine
@@ -28,7 +27,6 @@ const corsOptions ={
 app.use(cors(corsOptions));
 
 app.use('/', authRoutes);
-app.use('/discussion', discussionRoutes);
 app.use('/user', userRoutes);
 
 // Starting the backend server

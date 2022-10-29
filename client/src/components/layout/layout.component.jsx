@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
-  LogoutOutlined
+  LogoutOutlined,
 } from "@ant-design/icons";
 
 import { Layout, Menu } from "antd";
@@ -12,21 +12,18 @@ import { AuthContext } from "../../context/auth.context";
 const { Header, Content, Sider } = Layout;
 
 const CustomLayout = ({ children }) => {
-  const {handleLogout, isAuthenticated} = useContext(AuthContext);
+  const { handleLogout, isAuthenticated } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
-  const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined, LogoutOutlined].map(
+  const items2 = [UserOutlined, LaptopOutlined, LogoutOutlined].map(
     (icon, index) => {
       const sideMenuItems = [
-        isAuthenticated ? 'Dashboard' : 'Signup/Login',
-        "Add Favorites",
-        "View Favorites",
+        "Home",
+        "Weather of favourites",
+        isAuthenticated ? "Logout" : "Signup/Login",
       ];
-
-      if(isAuthenticated){
-        sideMenuItems.push('Logout');
-      }
+      console.log(isAuthenticated);
 
       return {
         key: index,
@@ -35,17 +32,16 @@ const CustomLayout = ({ children }) => {
       };
     }
   );
-  if(!isAuthenticated){
-    items2.pop();
-  }
-  
+  // if(!isAuthenticated){
+  //   items2.pop();
+  // }
+
   const navMap = {
-    '0' : isAuthenticated ? '/dashboard' : '/auth',
-    '1' : '/addFavorites',
-    '2' : '/viewFavorites',
-    '3' : '/logout',
-  }
-  
+    0: "/",
+    1: "/weatherOffavourites",
+    2: "/auth",
+  };
+
   return (
     <Layout style={{ height: "100vh", overflowY: "clip" }}>
       <Header className="header">
@@ -58,11 +54,11 @@ const CustomLayout = ({ children }) => {
             style={{ height: "100%", borderRight: 0 }}
             items={items2}
             onSelect={(val) => {
-              if(val.key !== '3'){
-                navigate(navMap[val.key])
+              if (val.key !== "2") {
+                navigate(navMap[val.key]);
               } else {
                 handleLogout();
-                navigate('/auth');
+                navigate("/auth");
               }
             }}
           />
